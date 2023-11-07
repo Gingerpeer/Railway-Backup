@@ -1,4 +1,4 @@
-# Railway Postgresql Backup Using Bun
+# Railway Postgresql Backup CLI Using Bun
 
 To install dependencies:
 
