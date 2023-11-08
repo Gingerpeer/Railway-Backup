@@ -1,14 +1,16 @@
 # Railway Postgresql Backup CLI Using Bun
+ Please take note that this CLI is intended for Macintosh only and Homebrew is required.
 
-Steps to take, create an .env file and add the following details 
-PGUSER
-PGHOST
-PGPORT
-PGDATABASE
-YOUR_FILENAME_HERE
-PGPASSWORD
+ # Setup Steps: 
+1. create an .env file and add the following details:
+    - PGUSER
+    - PGHOST
+    - PGPORT
+    - PGDATABASE
+    - YOUR_FILENAME_HERE
+    - PGPASSWORD
 
-Then go to types.d.ts and add the environment variables
+2. Then go to types.d.ts and add the environment variables
 
 To install dependencies:
 
