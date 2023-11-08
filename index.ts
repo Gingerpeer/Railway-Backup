@@ -1,4 +1,4 @@
-import { spawn } from "bun";
+import { spawnSync } from "bun";
   // avantgarde db
   const today = await new Date().toDateString().replace(/\s/g, '')
   const user = Bun.env.PGUSER;
@@ -17,10 +17,23 @@ import { spawn } from "bun";
 
 async function backupPostgresqlDB() {
   
-    console.log("Starting Backup")
-    await spawn(['bash', './backup.sh', user, host, port, db, fileName, pass]);
-    spawn(['bash', './backup.sh', aquaman_user, aquaman_host, aquaman_port, aquaman_db, aquaman_fileName, aquaman_pass]);
-  
+    console.log("Starting Backup Process")
+    const checkBrew = await spawnSync(['bash', './updateBrew.sh']);
+    console.log(checkBrew.stdout.toString())
+    console.log(checkBrew.stderr.toString())
+    const checkPostgresql = await spawnSync(['bash', './installPostgresql.sh'])
+    console.log(checkPostgresql.stdout.toString())
+    console.log(checkPostgresql.stderr.toString())
+    const agDump = await spawnSync(['bash', './backup.sh', user, host, port, db, fileName, pass]);
+    console.log(agDump.stdout.toString())
+    console.log(agDump.stderr.toString())
+    const aquaDump = await spawnSync(['bash', './backup.sh', aquaman_user, aquaman_host, aquaman_port, aquaman_db, aquaman_fileName, aquaman_pass]);
+    console.log(aquaDump.stdout.toString())
+    console.log(aquaDump.stderr.toString())
+    if(aquaDump.success){
+      console.log("Backup Succeeded")
+    }
+    
 }
 
 backupPostgresqlDB()
